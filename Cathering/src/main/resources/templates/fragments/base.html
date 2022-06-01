@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerfiles(title, css)">
+<meta charset="ISO-8859-1" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" th:href="@{/images/favicon/favicon.ico}" />
+<link rel="stylesheet" th:href="@{/css/base.css}">
+<link rel="stylesheet" th:href="${css}">
+<style>
+@import
+	url('https://fonts.googleapis.com/css2?family=Tangerine&family=Taviraj:wght@300&display=swap');
+</style>
+<title th:text="${title}"></title>
+</head>
+<body>
+	<header th:fragment="intestazione">
+		<nav>
+			<div class='menubar'>
+				<ul>
+					<li><img src="/images/logoCatering.png" id="logo"></li>
+					<li><a href="index.html"> Home </a></li>
+					<li><a href=#storia> Chi siamo </a></li>
+					<li class='tendina'><a href="buffet.html"> I nostri buffet
+					</a>
+						<div class='tendina-content'>
+							<ul>
+								<li th:each="buffet : ${buffets}"><a href="buffet.html"
+									th:href="@{'/buffet' + '/' + ${buffet.id}}"
+									th:text="${buffet.nome}}">Veg </a></li>
+							</ul>
+						</div></li>
+					<li class='tendina'><a href="chef.html"> I nostri chef</a>
+						<div class='tendina-content'>
+							<ul>
+								<li th:each="chef : ${chefs}"><a href="chef.html"
+									th:href="@{'/chef' + '/' + ${chef.id}}"
+									th:text="${chef.nome} + ' ' + ${chef.cognome}">Paolo Rossi</a>
+								</li>
+							</ul>
+						</div></li>
+					<li><a href=#contatti> Contatti</a></li>
+					<li><button class="login">Login</button></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+</body>
+</html>

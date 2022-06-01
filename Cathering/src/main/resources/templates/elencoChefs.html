@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="hhttp://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1" />
+<title>I nostri Chef</title>
+</head>
+<body>
+	<h1>Elenco chefs</h1>
+	<ul>
+		<li th:each="chef : ${chefs}"><a href="chef.html"
+			th:href="@{'/chef' + '/' + ${chef.id}}"
+			th:text="${chef.nome}">chef </a></li>
+	</ul>
+</body>
+</html>

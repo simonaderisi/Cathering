@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="hhttp://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='Catering Roma', css='/css/index.css')">
+</head>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	<section>
+		<header>
+			<img src="/images/sfondo2.png" id="sfondo">
+			<h1 id="titolo">Catering Roma</h1>
+		</header>
+		<div>
+			<a th:href="@{/aggiungiChef}"> Aggiungi Chef</a>
+		</div>
+		<div>
+			<a th:href="@{/elencoChef}"> Elenco Chef</a>
+		</div>
+		<div>
+			<a th:href="@{/ingrediente/add}"> Aggiungi Ingrediente</a>
+		</div>
+		<div>
+			<a th:href="@{/ingrediente/elenco}"> Elenco Ingrediente</a>
+		</div>
+	</section>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="hhttp://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1" />
+<title>Dettaglio Chef</title>
+</head>
+<body>
+	<h1 th:text="${ingrediente.nome} ">Pomodori</h1>
+	<p>
+		<span>Origine: </span> <span th:text="${ingrediente.origine}">italia</span>
+	</p>
+	<p>
+		<span>Descrizione: </span> <span th:text="${ingrediente.descrizione}">naz</span>
+	</p>
+</body>
+</html>
