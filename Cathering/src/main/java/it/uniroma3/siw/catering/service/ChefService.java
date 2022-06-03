@@ -48,4 +48,9 @@ public class ChefService implements CateringService<Chef> {
 		toModify.setBuffet(chef.getBuffet());
 	}
 
+	@Override
+	public boolean alreadyExist(Chef chef) {
+		return this.chefRepository.existsByNomeAndCognome(chef.getNome(), chef.getCognome());
+	}
+
 }

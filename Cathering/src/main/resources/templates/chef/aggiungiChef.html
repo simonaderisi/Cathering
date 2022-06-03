@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="hhttp://www.thymeleaf.org">
-<head>
-    <meta charset="ISO-8859-1" />
-    <title>Inserimento buffet</title>
+<head th:replace="fragments/base.html :: headerfiles(title='Inserimento chef', css='/css/index.css')">
 </head>
 <body>
-    <form th:action="@{/addChef}" method="post" th:object="${chef}">
+	<header th:replace="fragments/base.html :: intestazione"></header>
+    <form th:action="@{/admin/chef/add}" method="post" th:object="${chef}">
     	<div th:if = "${#fields.hasGlobalErrors()}">
     		<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</div>
     	<div> Nome: <input type="text" th:field="*{nome}" />

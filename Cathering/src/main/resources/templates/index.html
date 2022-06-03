@@ -10,17 +10,23 @@
 			<h1 id="titolo">Catering Roma</h1>
 		</header>
 		<div>
-			<a th:href="@{/aggiungiChef}"> Aggiungi Chef</a>
+			<a th:href="@{/admin/chef/add}"> Aggiungi Chef</a>
 		</div>
 		<div>
-			<a th:href="@{/elencoChef}"> Elenco Chef</a>
+			<a th:href="@{/chef/elenco}"> Elenco Chef</a>
 		</div>
 		<div>
-			<a th:href="@{/ingrediente/add}"> Aggiungi Ingrediente</a>
+			<a th:href="@{/admin/ingrediente/add}"> Aggiungi Ingrediente</a>
 		</div>
 		<div>
 			<a th:href="@{/ingrediente/elenco}"> Elenco Ingrediente</a>
 		</div>
+		<div>
+			<a th:href="@{/login}">Accedi</a>
+   		</div>
+		<div>
+			<a th:href="@{/register}">Registrati</a>
+   		</div>
 	</section>
 </body>
 </html>

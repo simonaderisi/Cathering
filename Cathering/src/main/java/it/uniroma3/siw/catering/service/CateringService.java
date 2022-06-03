@@ -22,4 +22,7 @@ public interface CateringService <T> {
 	@Transactional
 	public void modifyById(Long id, T t);
 	
+	public boolean alreadyExist(T t);
+	
+	
 }

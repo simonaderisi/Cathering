@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="hhttp://www.thymeleaf.org">
-<head>
-<meta charset="ISO-8859-1" />
-<title>Dettaglio Chef</title>
+<head th:replace="fragments/base.html :: headerfiles(title='Dettaglio Buffet', css='/css/index.css')">
 </head>
 <body>
-	<h1 th:text="${chef.nome} + ' ' + ${chef.cognome}">Paolo Rossi</h1>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+   <h1 th:text="${buffet.nome}">Veg</h1>
 	<p>
 		<span>Nazionalita: </span> <span th:text="${chef.nazionalita}">naz</span>
 	</p>
 	<p>
 		Buffets:
+	</p>
 	<ul>
 		<li th:each="chef : ${chef.buffet}"><a href="buffet.html"
 			th:href="@{'/buffet' + '/' + ${buffet.id}}"
 			th:text="${buffet.nome}">Veg </a></li>
 	</ul>
-	</p>
 </body>
 </html>

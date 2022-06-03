@@ -49,4 +49,10 @@ public class IngredienteService implements CateringService<Ingrediente> {
 		this.ingredienteRepository.save(toModify);
 	}
 
+	@Override
+	public boolean alreadyExist(Ingrediente ingrediente) {
+		return this.ingredienteRepository.existsByNomeAndOrigine(ingrediente.getNome(), ingrediente.getOrigine());
+	}
+
+
 }

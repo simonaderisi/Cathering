@@ -54,4 +54,9 @@ public class PiattoService implements CateringService<Piatto> {
         piattoRepository.save(old);	
 	}
 
+	@Override
+	public boolean alreadyExist(Piatto piatto) {
+		return this.piattoRepository.existsByNomeAndIngredientiIn(piatto.getNome(), piatto.getIngredienti());
+	}
+
 }

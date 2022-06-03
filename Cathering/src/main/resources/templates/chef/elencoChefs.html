@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="hhttp://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='I nostri Chef', css='/css/index.css')">
+</head>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	<h1>Elenco chefs</h1>
+	<ul>
+		<li th:each="chef : ${chefs}"> <!-- href="chef.html" -->
+			<a th:href="@{'/chef' + '/' + ${chef.id}}"
+			th:text="${chef.nome}">chef </a></li>
+	</ul>
+</body>
+</html>

@@ -49,4 +49,9 @@ public class BuffetService implements CateringService<Buffet> {
 		this.buffetRepository.save(toModify);
 	}
 
+	@Override
+	public boolean alreadyExist(Buffet buffet) {
+		return this.buffetRepository.existsByNomeAndPiattiInAndChefIn(buffet.getNome(), buffet.getPiatti(), buffet.getChef());
+	}
+
 }
