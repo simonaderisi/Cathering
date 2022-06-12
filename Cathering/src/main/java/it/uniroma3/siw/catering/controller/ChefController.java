@@ -7,15 +7,19 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.catering.controller.validator.ChefValidator;
 import it.uniroma3.siw.catering.model.Chef;
 import it.uniroma3.siw.catering.service.ChefService;
+import it.uniroma3.siw.catering.util.FileManager;
 
 @Controller
 public class ChefController {
@@ -25,6 +29,8 @@ public class ChefController {
 	
 	@Autowired
 	private ChefValidator chefValidator;
+	
+	public static String DIR = System.getProperty("user.dir")+"/src/main/resources/static/images/chef-photos/";
 	
 	/** metodi per visualizzare chef*/
 	
@@ -44,10 +50,15 @@ public class ChefController {
 	/** metodi (riservati agli amministratori) per aggiungere uno chef */ 
 	
 	@PostMapping("/admin/chef/add")
-	public String aggiungiChef(@Valid @ModelAttribute("chef") Chef chef, BindingResult bindingResult, Model model) {
+	public String aggiungiChef(@Valid @ModelAttribute("chef") Chef chef, 
+							   @RequestParam("image") MultipartFile multipartFile, BindingResult bindingResult, Model model) {
         this.chefValidator.validate(chef, bindingResult);
 		if(!bindingResult.hasErrors()) {
-            chefService.save(chef);
+			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+			chef.setPhoto(fileName);
+            chefService.save(chef);    
+            String uploadDir = DIR + chef.getId();
+            FileManager.store(multipartFile, uploadDir);
             model.addAttribute("chef", chef);
             return "chef/dettaglioChef.html";
         }

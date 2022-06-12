@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="hhttp://www.thymeleaf.org">
+<head
+	th:replace="fragments/base.html :: headerfiles(title='Conferma eliminazione piatto', css='/css/index.css')">
+</head>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	<h1>Conferma eliminazione</h1>
+	<div>
+		Vuoi veramente eliminare: </div>
+		<div>
+		<span th:text="${piatto.nome}"></span>
+		<span> con descrizione </span>
+		<span th:text="${piatto.descrizione}"></span>
+		</div>
+		<div>
+			<form method="post"
+				th:action="@{'/admin/piatto/elimina/conferma/' + ${piatto.id}}">
+				<button type="submit">Elimina</button>
+			</form>
+			<form method="get" th:action="@{'/admin/buffet/modifica/richiesta/' + ${piatto.buffet.id}}">
+				<button type="submit">Annulla</button>
+			</form>
+
+		</div>
+</body>
+</html>

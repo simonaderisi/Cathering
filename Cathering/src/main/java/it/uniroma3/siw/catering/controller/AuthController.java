@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,19 +17,23 @@ import it.uniroma3.siw.catering.controller.validator.users.UserValidator;
 import it.uniroma3.siw.catering.model.users.Credentials;
 import it.uniroma3.siw.catering.model.users.User;
 import it.uniroma3.siw.catering.service.users.CredentialsService;
+import it.uniroma3.siw.catering.service.users.UserService;
 
 @Controller
 public class AuthController {
+	
+	@Autowired
+	private UserService userService;
 
 	@Autowired
     private CredentialsService credentialsService;
-
 
     @Autowired
     private UserValidator userValidator;
 
     @Autowired
     private CredentialsValidator credentialsValidator;
+    
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String showRegisterForm (Model model) {
@@ -58,6 +63,19 @@ public class AuthController {
         }
         //return "home";
         return "index.html";
+    }
+    
+    @RequestMapping(value="/defaultGoogle", method = RequestMethod.GET)
+    public String loginWithGoogle (Model model, @AuthenticationPrincipal OidcUser principal) {
+		User googleUser = this.userService.getUser(principal.getEmail());
+		if(googleUser==null) {
+			googleUser = new User();
+			googleUser.setEmail(principal.getEmail());
+			googleUser.setNome(principal.getName());
+			googleUser.setCognome(principal.getFamilyName());
+			this.userService.saveUser(googleUser);
+		}
+    	return "index.html";
     }
 
     /*@RequestMapping(value = "/defaultGoogle", method = RequestMethod.GET)

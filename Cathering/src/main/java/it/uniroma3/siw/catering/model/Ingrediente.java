@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Ingrediente {
@@ -19,7 +20,12 @@ public class Ingrediente {
 	
 	@Column(length=2000)
 	private String descrizione;
+	
+	@ManyToOne
+	private Piatto piatto;
 
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -50,6 +56,14 @@ public class Ingrediente {
 
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
+	}
+
+	public Piatto getPiatto() {
+		return piatto;
+	}
+
+	public void setPiatto(Piatto piatto) {
+		this.piatto = piatto;
 	}
 	
 	

@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="hhttp://www.thymeleaf.org">
-<head th:replace="fragments/base.html :: headerfiles(title='Tutti gli ingredienti', css='/css/index.css')">
+<head
+	th:replace="fragments/base.html :: headerfiles(title='Tutti gli ingredienti', css='/css/index.css')">
 </head>
 <body>
 	<header th:replace="fragments/base.html :: intestazione"></header>
 	<h1>Elenco ingredienti</h1>
 	<ul>
-		<li th:each="ingrediente : ${ingredienti}"><a href="dettaglioIngrediente.html"
+		<li th:each="ingrediente : ${ingredienti}"><a
+			href="dettaglioIngrediente.html"
 			th:href="@{'/ingrediente' + '/' + ${ingrediente.id}}"
-			th:text="${ingrediente.nome}">chef </a></li>
+			th:text="${ingrediente.nome}">ingrediente </a>
+		<form method="get"
+			th:action="@{'/admin/ingrediente/elimina/richiesta/' + ${ingrediente.id}}">
+			<button type="submit">Cancella</button>
+		</form>
+		<form method="get"
+			th:action="@{'/admin/ingrediente/modifica/richiesta/' + ${ingrediente.id}}">
+			<button type="submit">Modifica</button>
+		</form>
+		</li>
 	</ul>
 </body>
 </html>

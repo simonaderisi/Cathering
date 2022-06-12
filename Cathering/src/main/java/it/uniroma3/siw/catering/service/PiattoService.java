@@ -40,23 +40,23 @@ public class PiattoService implements CateringService<Piatto> {
 	}
 
 	@Override
-	public void modifyById(Long id, Piatto p) {
-		Piatto old = piattoRepository.findById(id).get();
-        if(!p.getNome().equals(old.getNome())) {
-            old.setNome(p.getNome());
+	public void modifyById(Long id, Piatto piatto) {
+		Piatto toModify = piattoRepository.findById(id).get();
+        if(!piatto.getNome().equals(toModify.getNome()) && piatto.getNome()!=null) {
+            toModify.setNome(piatto.getNome());
         }
-        if(!p.getDescrizione().equals(old.getDescrizione())) {
-            old.setDescrizione(p.getDescrizione());
+        if(!piatto.getDescrizione().equals(toModify.getDescrizione()) && piatto.getDescrizione()!=null) {
+            toModify.setDescrizione(piatto.getDescrizione());
         }
-        if(!p.getIngredienti().equals(old.getIngredienti())) {
-            old.setIngredienti(p.getIngredienti());
+        if(piatto.getIngredienti() != null) {
+            toModify.setIngredienti(piatto.getIngredienti());
         }
-        piattoRepository.save(old);	
+        piattoRepository.save(toModify);	
 	}
 
 	@Override
 	public boolean alreadyExist(Piatto piatto) {
-		return this.piattoRepository.existsByNomeAndIngredientiIn(piatto.getNome(), piatto.getIngredienti());
+		return this.piattoRepository.existsByNomeAndDescrizioneAndBuffet(piatto.getNome(), piatto.getDescrizione(), piatto.getBuffet());
 	}
 
 }

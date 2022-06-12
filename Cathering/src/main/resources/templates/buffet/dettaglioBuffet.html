@@ -6,15 +6,7 @@
 	<header th:replace="fragments/base.html :: intestazione"></header>
    <h1 th:text="${buffet.nome}">Veg</h1>
 	<p>
-		<span>Nazionalita: </span> <span th:text="${chef.nazionalita}">naz</span>
+		<span>Descrizione: </span> <span th:text="${buffet.descrizione}">naz</span>
 	</p>
-	<p>
-		Buffets:
-	</p>
-	<ul>
-		<li th:each="chef : ${chef.buffet}"><a href="buffet.html"
-			th:href="@{'/buffet' + '/' + ${buffet.id}}"
-			th:text="${buffet.nome}">Veg </a></li>
-	</ul>
 </body>
 </html>

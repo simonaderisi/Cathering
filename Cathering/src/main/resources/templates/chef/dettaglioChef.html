@@ -11,11 +11,12 @@
 	</p>
 	<p>Buffets:</p>
 	<ul>
-		<li th:each="chef : ${chef.buffet}">
+		<li th:each="buffet : ${chef.buffet}">
 			<!-- href="buffet.html" --> <a
 			th:href="@{'/buffet' + '/' + ${buffet.id}}" th:text="${buffet.nome}">Veg
 		</a>
 		</li>
 	</ul>
+	<img th:if="${chef.photo != null}" th:src="@{'/images/chef-photos/'+ ${chef.id} + '/' + ${chef.photo}}"></img>
 </body>
 </html>

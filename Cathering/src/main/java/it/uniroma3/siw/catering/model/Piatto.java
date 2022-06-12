@@ -2,13 +2,17 @@ package it.uniroma3.siw.catering.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
 
 @Entity
 public class Piatto {
@@ -22,10 +26,14 @@ public class Piatto {
 	@Column(length=2000)
 	private String descrizione;
 	
-	@OneToMany
-	@JoinColumn(name = "ingrediente_id")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "piatto")
 	private List <Ingrediente> ingredienti;
+	
+	@ManyToOne
+	private Buffet buffet;
 
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -56,6 +64,14 @@ public class Piatto {
 
 	public void setIngredienti(List<Ingrediente> ingredienti) {
 		this.ingredienti = ingredienti;
+	}
+
+	public Buffet getBuffet() {
+		return buffet;
+	}
+
+	public void setBuffet(Buffet buffet) {
+		this.buffet = buffet;
 	}
 	
 	

@@ -5,8 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import it.uniroma3.siw.catering.model.users.Credentials;
+import it.uniroma3.siw.catering.model.users.User;
 import it.uniroma3.siw.catering.service.BuffetService;
 import it.uniroma3.siw.catering.service.ChefService;
+import it.uniroma3.siw.catering.service.users.CredentialsService;
 
 @Controller
 public class MainController {
@@ -16,6 +19,7 @@ public class MainController {
 	
 	@Autowired
 	private BuffetService buffetService;
+	
 
 	
 	public void getChefs(Model model) {
@@ -30,6 +34,11 @@ public class MainController {
 	public String init(Model model) {
 		this.getChefs(model);
 		this.getBuffets(model);
+		return "index.html";
+	}
+	
+	@GetMapping("/home")
+	public String returnToHome() {
 		return "index.html";
 	}
 }

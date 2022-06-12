@@ -42,16 +42,22 @@ public class BuffetService implements CateringService<Buffet> {
 	@Override
 	public void modifyById(Long id, Buffet buffet) {
 		Buffet toModify = this.findById(id);
-		toModify.setNome(buffet.getNome());
-		toModify.setDescrizione(buffet.getDescrizione());
-		toModify.setChef(buffet.getChef());
-		toModify.setPiatti(buffet.getPiatti());
+		if(buffet.getNome()!=null)
+			toModify.setNome(buffet.getNome());
+		if(buffet.getDescrizione() != null)
+			toModify.setDescrizione(buffet.getDescrizione());
+		if(buffet.getChef() != null)
+			toModify.setChef(buffet.getChef());
+		if(buffet.getPiatti()!=null)
+			toModify.setPiatti(buffet.getPiatti());
+		if(buffet.getChefIdent()!=null)
+			toModify.setChefIdent(buffet.getChefIdent());
 		this.buffetRepository.save(toModify);
 	}
 
 	@Override
 	public boolean alreadyExist(Buffet buffet) {
-		return this.buffetRepository.existsByNomeAndPiattiInAndChefIn(buffet.getNome(), buffet.getPiatti(), buffet.getChef());
+		return this.buffetRepository.existsByNomeAndDescrizioneAndChefIdent(buffet.getNome(), buffet.getDescrizione(), buffet.getChefIdent());
 	}
 
 }

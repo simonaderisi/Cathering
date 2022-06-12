@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="hhttp://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/base.html :: headerfiles(title='Inserimento ingrediente', css='/css/index.css')">
 </head>
 <body>
 	<header th:replace="fragments/base.html :: intestazione"></header>
-    <form th:action="@{/admin/ingrediente/add}" method="post" th:object="${ingrediente}">
+	<div>Aggiungi un ingrediente al piatto: <span th:text="${piatto.nome}"></span></div>
+    <form th:action="@{'/admin/ingrediente/add/' + ${piatto.id}}" method="post" th:object="${ingrediente}">
     	<div th:if = "${#fields.hasGlobalErrors()}">
     		<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</div>
     	<div> Nome: <input type="text" th:field="*{nome}" />
@@ -18,5 +19,6 @@
     	</div>
     	<div><button type="submit">Conferma </button></div>
     </form>
+    <form method="get" th:action="@{'/admin/piatto/modifica/richiesta/' + ${piatto.id}}"><button type="submit"> Annulla</button></form>
 </body>
 </html>

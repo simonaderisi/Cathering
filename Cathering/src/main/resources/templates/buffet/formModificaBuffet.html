@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head
+	th:replace="fragments/base.html :: headerfiles(title='Modifica buffet', css='/css/index.css')">
+</head>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+
+	<h2>Modifica Buffet</h2>
+
+	<form th:action="@{'/admin/buffet/modifica/conferma/' + ${buffet.id}}"
+		method="post" th:object="${buffet}">
+		<div th:if="${#fields.hasGlobalErrors()}">
+			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+		</div>
+		<div>
+			Nome:<br> <input type="text" th:field="*{nome}">
+		</div>
+		<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+		<br>
+		<div>
+			Descrizione:<br> <input type="text" th:field="*{descrizione}">
+		</div>
+		<div th:if="${#fields.hasErrors('descrizione')}"
+			th:errors="*{descrizione}"></div>
+		<div>
+			Chef: <span th:text="${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}"></span>
+		</div>
+		<div class="form-chef">
+			<label>Modifica Chef:</label>
+			<div th:each="chef : ${chefs}">
+				 <input type="radio" th:field="*{chefIdent}" th:value="${chef.id}" th:text="${chef.nome} +' ' + ${chef.cognome}" /> 
+			</div>
+		</div>
+		<div>
+			<button type="submit">Salva</button>
+		</div>
+	</form>
+		<br>
+		<div> Piatti: 
+			<ul>
+				<li th:each="piatto : ${buffet.piatti}"><a
+					
+					th:href="@{'/piatto/' + ${piatto.id}}"
+					th:text="${piatto.nome}">piatto </a>
+					<a th:href="@{/admin/piatto/elimina/richiesta/} + ${piatto.id}"> Elimina </a>
+					<a th:href="@{'/admin/piatto/modifica/richiesta/' + ${piatto.id}}"> Modifica </a></li>
+			</ul>
+		</div>
+		<br>
+		<div>
+			<a  th:href="@{/admin/piatto/add/form/} + ${buffet.id}">Aggiungi
+				piatto</a>
+		</div>
+		
+	<br>
+</body>
+</html>

@@ -51,7 +51,7 @@ public class IngredienteService implements CateringService<Ingrediente> {
 
 	@Override
 	public boolean alreadyExist(Ingrediente ingrediente) {
-		return this.ingredienteRepository.existsByNomeAndOrigine(ingrediente.getNome(), ingrediente.getOrigine());
+		return this.ingredienteRepository.existsByNomeAndOrigineAndPiatto(ingrediente.getNome(), ingrediente.getOrigine(), ingrediente.getPiatto());
 	}
 
 
