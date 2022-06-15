@@ -1,41 +1,88 @@
 <!DOCTYPE html>
 <html xmlns:th="hhttp://www.thymeleaf.org">
-<head th:replace="fragments/base.html :: headerfiles(title='Catering Roma', css='/css/index.css')">
+<head
+	th:replace="fragments/base.html :: headerfiles(title='Catering Roma', css='/css/index.css')">
 </head>
 <body>
 	<header th:replace="fragments/base.html :: intestazione"></header>
-	<section>
-		<header>
-			<img src="/images/sfondo2.png" id="sfondo">
-			<h1 id="titolo">Catering Roma</h1>
-		</header>
-		<div>
-			<a th:href="@{/admin/chef/add}"> Aggiungi Chef</a>
+	<section id="home">
+		<!-- OVERLAY -->
+		<div class="overlay">
+			<h1>Catering Roma</h1>
 		</div>
-		<div>
-			<a th:href="@{/chef/elenco}"> Elenco Chef</a>
-		</div>
-		<div>
-			<a th:href="@{/admin/ingrediente/add}"> Aggiungi Ingrediente</a>
-		</div>
-		<div>
-			<a th:href="@{/ingrediente/elenco}"> Elenco Ingrediente</a>
-		</div>
-		<div>
-			<a th:href="@{/login}">Accedi</a>
-   		</div>
-		<div>
-			<a th:href="@{/register}">Registrati</a>
-   		</div>
-   		<div>
-   			<a th:href="@{/logout}">Logou</a>
-   		</div>
-   		<div>
-   			<a th:href="@{/admin/piatto/add}">Aggiungi piatto</a>
-   		</div>
-   		<div>
-   			<a th:href="@{/admin/buffet/add}">Aggiungi buffet</a>
-   		</div>
+		<!-- END OF OVERLAY -->
 	</section>
+	<section id="about">
+		<h2>Qualcosa su di noi</h2>
+		<p>
+			Il catering indica il complesso delle operazioni di
+			approvvigionamento e rifornimento in massa di cibi e bevande pronti
+			che viene effettuato da apposite organizzazioni nell'ambito di
+			comunità, compagnie di trasporto, riunioni, cerimonie, ecc... <br>
+			Inizialmente con tale attività ci si riferiva specificatamente
+			all'approvvigionamento dei mezzi di trasporto (navi e treni), poi il
+			termine venne esteso anche ai servizi di mense aziendali. Importante
+			settore della moderna ristorazione indissolubilmente legato
+			all'attività di banqueting, il catering prevede in pratica
+			un'attività di vendita o somministrazione del cibo con cucina
+			espressa sul posto, nel caso del “catering completo”, oppure in un
+			luogo diverso da quello in cui esso viene prodotto, nel caso del
+			“catering veicolato”. Gli ambiti di maggior sviluppo del catering
+			riguardano la ristorazione sui mezzi di trasporto (marittima,
+			ferroviaria, aerea) e la ristorazione "a domicilio".
+		</p>
+		<p id="signature">
+			Catering Roma
+		</p>
+	</section>
+	<section id="collegamenti">
+		<div id="flexbox">
+		<ul>
+			<li class="flex-item">
+				<div class="color"><img src="/images/generalBuffet.png"></div>
+				<div class="description"> <a th:href="@{/buffet/elenco}"><strong>Vieni a scoprire i nostri Buffet!</strong></a>
+				</div>
+			</li>
+			<li class="flex-item">
+				<div class="color"><img src="/images/generalChef.png"></div>
+				<div class="description"> <a th:href="@{/chef/elenco}"> <strong> Vieni a scoprire i nostri Chef!</strong></a>
+				</div>
+			</li>
+		</ul>
+		</div>
+	</section>
+	<section id="contatti">
+		<p>Vuoi rimanere aggiornato sulle nostre proposte? 
+		<a th:href="@{/register}">Registrati!</a> (Se sei gia registrato fai il <a th:href="@{/login}"> login</a>)
+		</p>
+	</section>
+	<div>
+		<a th:href="@{/admin/chef/add}"> Aggiungi Chef</a>
+	</div>
+	<div>
+		<a th:href="@{/chef/elenco}"> Elenco Chef</a>
+	</div>
+	<div>
+		<a th:href="@{/admin/ingrediente/add}"> Aggiungi Ingrediente</a>
+	</div>
+	<div>
+		<a th:href="@{/ingrediente/elenco}"> Elenco Ingrediente</a>
+	</div>
+	<div>
+		<a th:href="@{/login}">Accedi</a>
+	</div>
+	<div>
+		<a th:href="@{/register}">Registrati</a>
+	</div>
+	<div>
+		<a th:href="@{/logout}">Logou</a>
+	</div>
+	<div>
+		<a th:href="@{/admin/piatto/add}">Aggiungi piatto</a>
+	</div>
+	<div>
+		<a th:href="@{/admin/buffet/add}">Aggiungi buffet</a>
+	</div>
+	<footer th:replace="fragments/base.html :: footer"></footer>
 </body>
 </html>

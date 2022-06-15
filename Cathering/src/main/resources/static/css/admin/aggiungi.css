@@ -1,0 +1,149 @@
+body {
+	background: #efefef;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+h4 {
+	/*font-family: 'Tangerine', cursive;*/
+	color: #900A0A;
+	font-size: 4rem;
+	text-align: center;
+}
+
+h5{
+	font-size: 2rem;
+}
+
+.aggiungi {
+	width: 50wv;
+	padding: 0 30% 0 30%;
+	min-width: 900px;
+}
+
+table {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.form {
+	position: relative;
+	z-index: 1;
+	background: #FFFFFF;
+	margin: 0 auto 100px;
+	padding: 45px;
+	text-align: center;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0
+		rgba(0, 0, 0, 0.24);
+}
+
+.form input {
+	outline: 0;
+	background: #f2f2f2;
+	width: 100%;
+	border: 0;
+	margin: 0 0 15px;
+	padding: 15px;
+	box-sizing: border-box;
+	font-size: 14px;
+}
+
+.form .descrizione {
+	text-align: top-left; 
+	height : 200px;
+	outline: 0;
+	background: #f2f2f2;
+	width: 100%;
+	border: 0;
+	margin: 0 0 15px;
+	padding: 15px;
+	box-sizing: border-box;
+	font-size: 14px;
+	height: 200px;
+}
+
+.form button {
+	text-transform: uppercase;
+	outline: 0;
+	background: #900A0A;
+	width: 100%;
+	border: 0;
+	padding: 15px;
+	color: #FFFFFF;
+	font-size: 14px;
+	-webkit-transition: all 0.3 ease;
+	transition: all 0.3 ease;
+	cursor: pointer;
+}
+
+.form button:hover, .form button:active, .form button:focus {
+	background: #781915;
+}
+
+.form .annulla button{
+	text-transform: uppercase;
+	outline: #900A0A solid 1px;
+	background: #FFFFFF;
+	width: 100%;
+	border: 0;
+	padding: 15px;
+	margin-top: 20px;
+	color: #900A0A;
+	font-size: 14px;
+	-webkit-transition: all 0.3 ease;
+	transition: all 0.3 ease;
+	cursor: pointer;
+}
+
+.operazione button{
+	padding: 10px;
+	margin-top: 0;
+	text-transform: uppercase;
+	outline: #900A0A solid 1px;
+	background: #FFFFFF;
+	width: 100%;
+	border: 0;
+	color: #900A0A;
+	font-size: 14px;
+	-webkit-transition: all 0.3 ease;
+	transition: all 0.3 ease;
+	cursor: pointer;
+}
+
+.form .annulla button:hover, .form .annulla button:active, .form .annulla button:focus{
+	outline: #900A0A solid 10px;
+}
+
+.operazione button:hover, .operazione button:active, .operazione button:focus{
+	background: #900A0A;
+	color: #FFFFFF;
+}
+
+.form > div{
+	padding-bottom: 20px;
+}
+
+
+.elenco li{
+	list-style: none;
+	margin-bottom: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: start;
+}
+
+.elenco .nome{
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.warning{
+	color: red;
+}
+
+@media ( max-width : 900px) {
+	.aggiungi {
+		padding: 0 0 0 0;
+	}
+}

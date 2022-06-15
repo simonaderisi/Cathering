@@ -23,8 +23,8 @@ public class FileManager {
 		return fileNameAndPath.getFileName().toString();
 	}
 	
-	/*public static void removeImg(String owner, String name) {
-		Path fileNameAndPath  = Paths.get(setupDirName(owner)+"/"+name);
+	public static void removeImg(String directory, String name) {
+		Path fileNameAndPath  = Paths.get(directory + "/" + name);
 		try {
 			Files.delete(fileNameAndPath);
 		} catch (IOException e) {
@@ -32,29 +32,29 @@ public class FileManager {
 		}
 	}
 	
-	public static void removeImgAndDir(String owner, String name) {
-		removeImg(owner, name);
-		removeDirectory(owner);
+	public static void removeImgAndDir(String directory, String name) {
+		removeImg(directory, name);
+		removeDirectory(directory);
 	}	
 	
-	public static void removeImgs(String owner, String[] names) {
+	public static void removeImgs(String directory, String[] names) {
 		for(String name : names) {
-			removeImg(owner, name);
+			removeImg(directory, name);
 		}
 	}
 	
-	public static void removeImgsAndDir(String owner, String[] names) {
-		removeImgs(owner, names);
-		removeDirectory(owner);
+	public static void removeImgsAndDir(String directory, String[] names) {
+		removeImgs(directory, names);
+		removeDirectory(directory);
 	}
 	
-	private static void removeDirectory(String owner) {
-		new File(setupDirName(owner)).delete();
+	private static void removeDirectory(String directory) {
+		new File(directory).delete();
 	}
 	
-	public static void dirEmpty(String owner) {
-		for(File file : new File(setupDirName(owner)).listFiles()) {
-			if(file.isDirectory()) dirEmptyEndDelete(owner + "/" + file.getName()); 
+	public static void dirEmpty(String directory) {
+		for(File file : new File(directory).listFiles()) {
+			if(file.isDirectory()) dirEmptyEndDelete(directory + "/" + file.getName()); 
 			try {
 				Files.delete(file.toPath());
 			} catch (IOException e) {
@@ -63,9 +63,13 @@ public class FileManager {
 		}
 	}
 	
-	public static void dirEmptyEndDelete(String owner) {
-		dirEmpty(owner);
-		removeDirectory(owner);
-	}*/
+	public static void dirEmptyEndDelete(String directory) {
+		dirEmpty(directory);
+		removeDirectory(directory);
+	}
+	
+	public static void dirChangeName(String oldDir, String newDir) {
+		new File(oldDir).renameTo(new File(newDir));
+	}
 
 }

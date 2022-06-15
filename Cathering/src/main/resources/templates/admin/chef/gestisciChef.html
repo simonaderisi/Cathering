@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="hhttp://www.thymeleaf.org">
+<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Gestisci chef', css='/css/admin/gestisci.css')">
+</head><!--  th:if="${chef.photo != null}"-->
+<body>
+	<header th:replace="fragments/baseAdmin.html :: intestazione"></header>
+	<h1>Elenco Chef</h1>
+	<div class="elenco">
+		<ul class="lista">
+			<li class="elemento" th:each="chef : ${chefs}">
+				<div class="foto gg">
+					<img th:src="@{'/images/chef-photos/'+ ${chef.id} + '/' + ${chef.photo}}"></img> 
+				</div>
+				<div class="info gg">
+					<div class="nome" th:text="${chef.nome} +' ' + ${chef.cognome}"></div>
+					<div>Nazionalita: <span th:text="${chef.nazionalita}"></span></div>
+					<div>Buffet offerti: <div class="elenco" th:each="buffet : ${chef.buffet}"> <a th:href="@{/buffet/} + ${buffet.id}" th:text="${buffet.nome}"></a></div></div>
+				</div>
+				<div class="operazioni gg">
+					<form th:action="@{/admin/chef/elimina/richiesta/} + ${chef.id}">
+						<button type="submit">Elimina</button>
+					</form>
+					<form th:action="@{/admin/chef/modifica/richiesta/} + ${chef.id}">
+						<button type="submit">Modifica</button>
+					</form>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<footer th:replace="fragments/baseAdmin.html :: footer"></footer>
+</body>
+</html>

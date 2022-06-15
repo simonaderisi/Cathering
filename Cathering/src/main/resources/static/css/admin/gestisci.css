@@ -1,0 +1,76 @@
+h1{
+	text-align: center;
+	color:  #900A0A;
+	font-size: 5rem;
+}
+
+.nome{
+	font-size: 3rem;
+	font-weight: bold;
+}
+
+.elenco{
+	padding: 5%;
+}
+
+.lista{
+	width:100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: start;
+}
+
+li {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: stretch;
+	align-items: stretch;
+}
+
+.gg{
+	width:30%;
+}
+
+img{
+	width: 50%;
+	height: auto;
+}
+
+form{
+	margin-right: 20px;
+}
+
+form button {
+  text-transform: uppercase;
+  outline: 0;
+  background: #900A0A;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  margin:15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+form button:hover, form button:active, form button:focus {
+  background: #781915;
+}
+
+.operazioni{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: start;
+}
+
+a{
+	color: black;
+}
+
+a:visited, a:unvisited{
+	color: black;
+}

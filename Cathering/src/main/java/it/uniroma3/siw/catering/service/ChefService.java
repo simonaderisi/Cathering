@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.uniroma3.siw.catering.model.Buffet;
 import it.uniroma3.siw.catering.model.Chef;
 import it.uniroma3.siw.catering.repository.ChefRepository;
 
@@ -36,6 +37,11 @@ public class ChefService implements CateringService<Chef> {
 
 	@Override
 	public void deleteById(Long id) {
+		Chef chef = findById(id);
+		for(Buffet buffet : chef.getBuffet()) {
+			buffet.setChef(null);
+		}
+		
 		this.chefRepository.deleteById(id);
 	}
 
@@ -46,6 +52,9 @@ public class ChefService implements CateringService<Chef> {
 		toModify.setCognome(chef.getCognome());
 		toModify.setNazionalita(chef.getNazionalita());
 		toModify.setBuffet(chef.getBuffet());
+		if(chef.getPhoto()!=null)
+			toModify.setPhoto(chef.getPhoto());
+		this.chefRepository.save(toModify);
 	}
 
 	@Override

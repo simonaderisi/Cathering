@@ -26,7 +26,8 @@ public class IngredienteController {
 	@Autowired
 	private IngredienteValidator ingredienteValidator;
 	
-	@Autowired PiattoService piattoService;
+	@Autowired 
+	private PiattoService piattoService;
 	
 	
 	/** metodi per visualizzare ingredienti **/
@@ -42,18 +43,12 @@ public class IngredienteController {
 		return "ingrediente/dettaglioIngrediente.html";
 	}
 	
+	
+	
+	/*** ADMIN ***/
+	
 	/** metodi (accessibili solo agli amministratori) per aggiungere ingredienti **/
-	/*
-	@PostMapping("/admin/ingrediente/add")
-	public String aggiungiIngrediente(@Valid @ModelAttribute("ingrediente") Ingrediente ingrediente, BindingResult bindingResult, Model model) {
-        this.ingredienteValidator.validate(ingrediente, bindingResult);
-		if(!bindingResult.hasErrors()) {
-            ingredienteService.save(ingrediente);
-            model.addAttribute("ingrediente", ingrediente);
-            return "ingrediente/dettaglioIngrediente.html";
-        }
-        return "index.html";
-    }*/
+
 	
 	@PostMapping("/admin/ingrediente/add/{id}")
 	public String aggiungiIngredienteAlPiatto(@PathVariable("id") Long idPiatto, @Valid @ModelAttribute("ingrediente") Ingrediente ingrediente, 
@@ -62,22 +57,22 @@ public class IngredienteController {
 		ingrediente.setPiatto(piatto);
         this.ingredienteValidator.validate(ingrediente, bindingResult);
 		if(!bindingResult.hasErrors()) {
-            //ingredienteService.save(ingrediente);
             piatto.getIngredienti().add(ingrediente);
             this.piattoService.modifyById(idPiatto, piatto);
             model.addAttribute("piatto", piatto);
-            return "piatto/formModificaPiatto.html";
+            return "admin/piatto/formModificaPiatto.html";
         }
-        return "index.html";
+		model.addAttribute("piatto", piattoService.findById(idPiatto));
+		model.addAttribute("ingrediente", ingrediente);
+        return "admin/ingrediente/aggiungiIngrediente.html";
     }
 	
 	
 	@GetMapping("/admin/ingrediente/add/form/{id}")
 	public String ingredienteForm(@PathVariable("id") Long idPiatto, Model model) {
-		System.out.println("entro nel metodo");
 		model.addAttribute("ingrediente", new Ingrediente());
 		model.addAttribute("piatto", piattoService.findById(idPiatto));
-		return "ingrediente/aggiungiIngrediente.html";
+		return "admin/ingrediente/aggiungiIngrediente.html";
 	}
 	
 	
@@ -86,28 +81,30 @@ public class IngredienteController {
 	@GetMapping("/admin/ingrediente/modifica/richiesta/{id}")
 	public String chiediModificaIngrediente(@PathVariable("id") Long idIngrediente, Model model) {
 		model.addAttribute("ingrediente", this.ingredienteService.findById(idIngrediente));
-		return "ingrediente/formModificaIngrediente.html";
+		return "admin/ingrediente/formModificaIngrediente.html";
 	}
 	
 	@PostMapping("/admin/ingrediente/modifica/conferma/{id}")
 	public String confermaModificaIngrediente(@Valid @ModelAttribute("ingrediente")  Ingrediente ingrediente, 
 											  BindingResult bindingResult, @PathVariable("id") Long idIngrediente, Model model) {
+		//setto il piatto perche il validator prende anche il piatto come parametro
 		ingrediente.setPiatto(ingredienteService.findById(idIngrediente).getPiatto());
 		this.ingredienteValidator.validate(ingrediente, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			this.ingredienteService.modifyById(idIngrediente, ingrediente);
 			model.addAttribute("piatto", this.ingredienteService.findById(idIngrediente).getPiatto());
-			return "piatto/formModificaPiatto.html";
+			return "admin/piatto/formModificaPiatto.html";
 		}
-		return "ingrediente/formModificaIngrediente.html";
+		return chiediModificaIngrediente(idIngrediente, model);
 	}
+	
 	
 	/** metodi (accessibili solo agli amministratori) per eliminare ingredienti **/
 	
 	@GetMapping("/admin/ingrediente/elimina/richiesta/{id}")
 	public String chiediEliminazioneIngrediente(@PathVariable("id") Long idIngrediente, Model model) {
 		model.addAttribute("ingrediente", this.ingredienteService.findById(idIngrediente));
-		return "ingrediente/confermaEliminazioneIngrediente.html";
+		return "admin/ingrediente/confermaEliminazioneIngrediente.html";
 	}
 	
 	@PostMapping("/admin/ingrediente/elimina/conferma/{id}")
@@ -117,7 +114,7 @@ public class IngredienteController {
 		piatto.getIngredienti().remove(toDelete);
 		this.ingredienteService.deleteById(idIngrediente);
 		model.addAttribute("piatto", piatto);
-		return "piatto/formModificaPiatto.html";
+		return "admin/piatto/formModificaPiatto.html";
 	}
 
 

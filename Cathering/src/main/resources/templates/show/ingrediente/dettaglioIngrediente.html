@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="hhttp://www.thymeleaf.org">
+<head
+	th:replace="fragments/base.html :: headerfiles(title='Dettaglio Ingrediente', css='/css/show.css')">
+</head>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	<div class="singleton">
+		<div class="info large">
+			<h1 th:text="${ingrediente.nome}">ingrediente </h1>
+			<p>
+				<span>Origine: </span> <span th:text="${ingrediente.origine}">naz</span>
+			</p>
+			<p>
+				<span>Descrizione: </span> <span th:text="${ingrediente.descrizione}">naz</span>
+			</p>
+		</div>
+	</div>
+
+	<footer th:replace="fragments/base.html :: footer"></footer>
+</body>
+</html>

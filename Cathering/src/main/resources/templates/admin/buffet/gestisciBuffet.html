@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="hhttp://www.thymeleaf.org">
+<head th:replace="fragments/baseAdmin.html :: headerfiles(title='Gestisci buffet', css='/css/admin/gestisci.css')">
+</head>
+<body>
+	<header th:replace="fragments/baseAdmin.html :: intestazione"></header>
+	<h1>Elenco Buffet</h1>
+	
+	<div class="elenco">
+		<ul class="lista">
+			<li class="elemento" th:each="buffet : ${buffets}">
+				<div class="info gg">
+					<div class="nome">Buffet <span th:text="${buffet.nome}"></span></div>
+					<div>Descrizione: <span th:text="${buffet.descrizione}"></span></div>
+					<div>Questo buffet e offerto da <span th:text="${buffet.chef.nome} + ' '+ ${buffet.chef.cognome}"></span></div>
+				</div>
+				<div class="operazioni gg">
+					<form th:action="@{/admin/buffet/elimina/richiesta/} + ${buffet.id}">
+						<button type="submit">Elimina</button>
+					</form>
+					<form th:action="@{/admin/buffet/modifica/richiesta/} + ${buffet.id}">
+						<button type="submit">Modifica</button>
+					</form>
+				</div>
+			</li>
+		</ul>
+	</div>
+	
+	<footer th:replace="fragments/baseAdmin.html :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerfiles(title, css)">
+<meta charset="ISO-8859-1" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" th:href="@{/images/favicon/favicon.ico}" />
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Tangerine&family=Taviraj:wght@300&display=swap');
+</style>
+<title th:text="${title}"></title>
+<link rel="stylesheet" th:href="@{/css/base.css}">
+<link rel="stylesheet" th:href="${css}">
+</head>
+<body>
+	<nav th:fragment="intestazione">
+		<div class="nav">
+			<input type="checkbox" id="nav-check">
+			<div class="nav-header">
+				<img class = "logo" src="/images/logoCatering.png" th:href="@{/home}">
+			</div>
+			<div class="nav-btn">
+				<label for="nav-check"> <span></span> <span></span> <span></span>
+				</label>
+			</div>
+
+			<div class="nav-links">
+				<a th:href="@{/homeAdmin}">Home</a> 
+				<a th:href="@{/admin/buffet/manage}">Gestisci buffet</a>
+				<a th:href="@{/admin/chef/manage}" >Gestisci chef</a> 
+			</div>
+		</div>
+	</nav>
+	<footer th:fragment="footer">
+			<div class="logout container">
+				<strong>Sei nella sezione riservata agli amministratori. </strong> (<a th:href="@{/logout}"> logout</a>)
+			</div>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="hhttp://www.thymeleaf.org">
+<head
+	th:replace="fragments/base.html :: headerfiles(title='I nostri chef', css='/css/show.css')">
+</head>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	<h1>I nostri Buffet</h1>
+
+		<div class="cards">
+			<a class="card" th:each="buffet: ${buffets}"
+				th:href="@{/buffet/} + ${buffet.id}"> 
+				<span class="card-header" th:text="${buffet.nome}">
+				</span> 
+			<span class="card-summary" th:text="${buffet.descrizione}">
+				descrizione </span> 
+			<span class="card-meta"> Clicca per scoprire di piu </span>
+			</a>
+
+		</div>
+	<footer th:replace="fragments/base.html :: footer"></footer>
+</body>
+</html>

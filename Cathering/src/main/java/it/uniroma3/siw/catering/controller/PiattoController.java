@@ -1,7 +1,5 @@
 package it.uniroma3.siw.catering.controller;
 
-import java.util.Collection;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import it.uniroma3.siw.catering.controller.validator.PiattoValidator;
 import it.uniroma3.siw.catering.model.Buffet;
-import it.uniroma3.siw.catering.model.Ingrediente;
 import it.uniroma3.siw.catering.model.Piatto;
 import it.uniroma3.siw.catering.service.BuffetService;
+import it.uniroma3.siw.catering.service.ChefService;
 import it.uniroma3.siw.catering.service.PiattoService;
 
 @Controller
@@ -31,13 +29,16 @@ public class PiattoController {
 	@Autowired
 	private BuffetService buffetService;
 	
+	@Autowired
+	private  ChefService chefService;
+	
 	
 	/* metodi per visualizzare piatti */
 	
 	@GetMapping("/piatto/elenco")
 	public String allPiatti(Model model) {
 		model.addAttribute("piatti", this.piattoService.findAll());
-		return "piatto/elencoPiatti.html"; //impl
+		return "piatto/elencoPiatti.html";
 	}
 	
 	@GetMapping("/piatto/{id}")
@@ -46,18 +47,11 @@ public class PiattoController {
 		return "piatto/dettaglioPiatto.html"; //impl
 	}
 	
+	
+	
+	/*** ADMIN ***/
+	
 	/* metodi (accessibili solo agli amministratori) per aggiungere piatti */
-	/*
-	@PostMapping("/admin/piatto/add")
-	public String aggiungiPiatto(@Valid @ModelAttribute("piatto") Piatto piatto, BindingResult bindingResult, Model model) {
-        this.piattoValidator.validate(piatto, bindingResult);
-		if(!bindingResult.hasErrors()) {
-            piattoService.save(piatto);
-            model.addAttribute("piatto", piatto);
-            return "piatto/dettaglioPiatto.html"; //da implementare
-        }
-        return "index.html";
-    }*/
 	
 	@PostMapping("/admin/piatto/add/{id}")
 	public String aggiungiPiattoAlBuffet(@PathVariable("id") Long idBuffet, @Valid @ModelAttribute("piatto") Piatto piatto, 
@@ -69,9 +63,12 @@ public class PiattoController {
             buffet.getPiatti().add(piatto);
             this.buffetService.modifyById(idBuffet, buffet);
             model.addAttribute("buffet", buffet);
-            return "buffet/formModificaBuffet.html"; 
+            model.addAttribute("chefs", this.chefService.findAll());
+            return "admin/buffet/formModificaBuffet.html"; 
         }
-        return "index.html";
+		model.addAttribute("buffet", buffet);
+		model.addAttribute("piatto", piatto);
+        return "admin/piatto/aggiungiPiatto.html";
 	}
 	
 	
@@ -79,7 +76,7 @@ public class PiattoController {
 	public String piattoForm(@PathVariable("id") Long idBuffet, Model model) {
 		model.addAttribute("buffet", this.buffetService.findById(idBuffet));
 		model.addAttribute("piatto", new Piatto());
-		return "piatto/aggiungiPiatto.html";
+		return "admin/piatto/aggiungiPiatto.html";
 	}
 	
 	/* metodi (accessibili solo agli amministratori) per modificare piatti */
@@ -87,7 +84,7 @@ public class PiattoController {
 	@GetMapping("/admin/piatto/modifica/richiesta/{id}")
 	public String chiediModificaPiatto(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("piatto", this.piattoService.findById(id));
-		return "piatto/formModificaPiatto.html";
+		return "admin/piatto/formModificaPiatto.html";
 	}
 	
 	@PostMapping("/admin/piatto/modifica/conferma/{id}")
@@ -98,9 +95,10 @@ public class PiattoController {
 		if(!bindingResult.hasErrors()) {
 			this.piattoService.modifyById(idPiatto, piatto);
 			model.addAttribute("buffet", this.piattoService.findById(idPiatto).getBuffet());
-			return "buffet/formModificaBuffet.html";
+			model.addAttribute("chefs", this.chefService.findAll());
+			return "admin/buffet/formModificaBuffet.html";
 		}
-		return "piatto/formModificaPiatto.html";
+		return chiediModificaPiatto(idPiatto, model);
 	}
 	
 	/** metodi (accessibili solo agli amministratori) per eliminare piatti **/
@@ -108,7 +106,7 @@ public class PiattoController {
 	@GetMapping("/admin/piatto/elimina/richiesta/{id}")
 	public String chiediEliminazionePiatto(@PathVariable("id") Long idPiatto, Model model) {
 		model.addAttribute("piatto", this.piattoService.findById(idPiatto));
-		return "piatto/confermaEliminazionePiatto.html";
+		return "admin/piatto/confermaEliminazionePiatto.html";
 	}
 	
 	@PostMapping("/admin/piatto/elimina/conferma/{id}")
@@ -117,7 +115,8 @@ public class PiattoController {
 		buffet.getPiatti().remove(piattoService.findById(idPiatto));
 		this.piattoService.deleteById(idPiatto);
 		model.addAttribute("buffet", buffet);
-		return "buffet/formModificaBuffet.html";
+		model.addAttribute("chefs", this.chefService.findAll());
+		return "admin/buffet/formModificaBuffet.html";
 	}
 	
 	

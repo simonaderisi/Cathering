@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="hhttp://www.thymeleaf.org">
+<head
+	th:replace="fragments/base.html :: headerfiles(title='Conferma eliminazione chef', css='/css/admin/aggiungi.css')">
+</head>
+<body>
+	<header th:replace="fragments/baseAdmin.html :: intestazione"></header>
+	<h4> Admin - Conferma eliminazione</h4>
+	<div class="aggiungi">
+	<div class="form">
+	<div>
+		Vuoi veramente eliminare il buffet 
+		<span th:text="${buffet.nome}"></span>
+		<span> con descrizione "</span>
+		<span th:text="${buffet.descrizione}"></span>"
+	</div>
+		<div class="warning" > Attenzione! L'azione e irreversibile.</div>
+		<div>
+			<form method="post"
+				th:action="@{'/admin/buffet/elimina/conferma/' + ${buffet.id}}">
+				<button type="submit">Elimina</button>
+			</form>
+			<form class="annulla" method="get" th:action="@{/admin/buffet/manage}">
+				<button type="submit">Annulla</button>
+			</form>
+
+		</div>
+	</div></div>
+	<footer th:replace="fragments/baseAdmin.html :: footer"></footer>
+</body>
+</html>

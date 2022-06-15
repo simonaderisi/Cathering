@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="hhttp://www.thymeleaf.org">
+<head
+	th:replace="fragments/base.html :: headerfiles(title='I nostri chef', css='/css/show.css')">
+</head>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	<h1>I nostri Chef</h1>
+
+	<div class="cards">
+		<a class="card chef" th:each="chef : ${chefs}"
+			th:href="@{/chef/} + ${chef.id}"> 
+			<img src="@{'images/chef-photos/'+ ${chef.id} + '/' + ${chef.photo}}">
+			<div class="info">
+				<span class="card-header"
+					th:text="${chef.nome} + ' ' + ${chef.cognome}"> </span> <span
+					class="card-summary"
+					th:text="'Nazionalita: ' + ${chef.nazionalita}"> origine </span> <span
+					class="card-meta"> Clicca per scoprire di piu </span>
+			</div>
+		</a>
+
+	</div>
+	<footer th:replace="fragments/base.html :: footer"></footer>
+</body>
+</html>

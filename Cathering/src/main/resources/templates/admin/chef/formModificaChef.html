@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='Modifica chef', css='/css/admin/aggiungi.css')"> </head>
+<body>
+	<header th:replace="fragments/baseAdmin.html :: intestazione"></header>
+	<h4>Admin - Modifica Chef</h4>
+	 <div class="aggiungi">
+		<div class="form">
+			<div>Modifica i dati dello chef </div>
+			<h5>Info</h5>
+			<form class="aggiungi-form" th:action="@{'/admin/chef/modifica/conferma/' + ${chef.id}}" 
+			method="post" th:object="${chef}" enctype="multipart/form-data" >
+				<div th:if = "${#fields.hasGlobalErrors()}">
+    				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</div>
+				<table>
+					<tr>
+						<td>Nome</td>
+						<td><input type="text" placeholder="nome"
+							th:field="*{nome}" /></td>
+						<td th:if="${#fields.hasErrors('nome')}"
+							th:errors="${nome}" th:style="'color:red'"></td>
+					</tr>
+					<tr>
+						<td>Cognome</td>
+						<td><input type="text" placeholder="cognome"
+							th:field="*{cognome}" /></td>
+						<td th:if="${#fields.hasErrors('cognome')}"
+							th:errors="${cognome}" th:style="'color:red'"></td>
+					</tr>
+					<tr>
+						<td>Nazionalita</td>
+						<td><input type="text" placeholder="nazionalita"
+							th:field="*{nazionalita}" /></td>
+						<td th:if="${#fields.hasErrors('nazionalita')}"
+							th:errors="${nazionalita}" th:style="'color:red'"></td>
+					</tr>
+					<tr>
+						<td>Modifica foto</td>
+						<td><input type="file" name="image" accept="image/png, image/jpeg" /></td>
+					</tr>
+				</table>
+				<button type="submit">Modifica chef</button>
+			</form>
+			<div>
+				<form class="annulla" method="get" th:action="@{/admin/chef/manage}">
+					<button  type="submit"> Annulla</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="fragments/baseAdmin.html :: footer"></footer>
+</body>
+</html>

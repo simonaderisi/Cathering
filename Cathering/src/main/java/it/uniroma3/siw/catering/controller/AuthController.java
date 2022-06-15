@@ -58,10 +58,8 @@ public class AuthController {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
         if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-            //return "admin/home";
-        	return "index.html";
+        	return "admin/indexAdmin.html";
         }
-        //return "home";
         return "index.html";
     }
     
@@ -78,41 +76,16 @@ public class AuthController {
     	return "index.html";
     }
 
-    /*@RequestMapping(value = "/defaultGoogle", method = RequestMethod.GET)
-    public String defaultAfterLoginGoogle(Model model, @AuthenticationPrincipal OidcUser principal) {
-        GoogleUser googleUser = this.googleUserService.getGoogleUser(principal.getEmail());
-        if (googleUser == null) {
-            saveGoogleUser(model, principal);
-        }
-        return "home";
-    }
-
-    @RequestMapping(value = "/saveGoogleUser", method = RequestMethod.POST)
-    public String saveGoogleUser(Model model, OidcUser principal) {
-        GoogleUser googleUser = this.googleUserService.getGoogleUser(principal.getEmail());
-        if (googleUser == null) {
-            googleUser = new GoogleUser();
-            googleUser.setEmail(principal.getEmail());
-            googleUser.setFullName(principal.getFullName());
-            this.googleUserService.saveGoogleUser(googleUser);
-        }
-        return "home";
-    }*/
-
 
     @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
     public String registerUser(@ModelAttribute("user") User user, BindingResult userBindingResult,
                                @ModelAttribute("credentials") Credentials credentials, BindingResult credentialsBindingResult,
                                Model model) {
 
-        // validate user and credentials fields
         this.userValidator.validate(user, userBindingResult);
         this.credentialsValidator.validate(credentials, credentialsBindingResult);
-
-        // if neither of them had invalid contents, store the User and the Credentials into the DB
+        
         if (!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
-            // set the user and store the credentials;
-            // this also stores the User, thanks to Cascade.ALL policy
             credentials.setUser(user);
             credentialsService.saveCredentials(credentials);
             return "authentication/successfulRegistration.html";

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head
+	th:replace="fragments/base.html :: headerfiles(title='Modifica buffet', css='/css/admin/aggiungi.css')">
+</head>
+<body>
+	<header th:replace="fragments/baseAdmin.html :: intestazione"></header>
+	<h4>Admin - Modifica Buffet</h4>
+	 <div class="aggiungi">
+		<div class="form">
+			<h5>Info</h5>
+			<form class="aggiungi-form" th:action="@{'/admin/buffet/modifica/conferma/' + ${buffet.id}}" method="post" th:object="${buffet}" >
+				<div th:if = "${#fields.hasGlobalErrors()}">
+    				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</div>
+				<table>
+					<tr>
+						<td>Nome</td>
+						<td><input type="text" placeholder="nome"
+							th:field="*{nome}" /></td>
+						<td th:if="${#fields.hasErrors('nome')}"
+							th:errors="${nome}" th:style="'color:red'"></td>
+					</tr>
+					<tr>
+						<td>Descrizione</td>
+						<td ><textarea class = "descrizione" type="text" placeholder="descrizione"
+							th:field="*{descrizione}" ></textarea></td>
+						<td th:if="${#fields.hasErrors('descrizione')}"
+							th:errors="${descrizione}" th:style="'color:red'"></td>
+					</tr>
+					<tr>
+						<td>L'attuale chef e <span th:text="${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}"></span></td>
+					</tr>
+					<tr class="radio">
+						<td> <label>Modifica chef</label></td>
+						<td><div th:each="chef : ${chefs}">
+							<input type="radio" th:field="*{chefIdent}" th:value="${chef.id}" th:text="${chef.nome} +' ' + ${chef.cognome}"></div></td>
+					</tr>
+				</table>
+				<button type="submit">Modifica info buffet</button>
+			</form>
+			<div class="elenco">
+				<h5>I piatti</h5>
+				<ul>
+					<li class="nome" th:each="piatto : ${buffet.piatti}">
+					 	<span th:text="${piatto.nome}"> piatto</span>
+						<form class="operazione" th:action="@{/admin/piatto/elimina/richiesta/} + ${piatto.id}" method="get">
+							<button type="submit">Elimina</button>
+						</form>
+						<form class="operazione" th:action="@{/admin/piatto/modifica/richiesta/} + ${piatto.id}" method="get">
+							<button type="submit">Modifica</button>
+						</form>
+					</li>
+				</ul>
+				<form method="get" th:action="@{/admin/piatto/add/form/} + ${buffet.id}">
+					<button  type="submit"> Aggiungi piatto</button>
+				</form>
+			</div>
+			<div>
+				<form class="annulla" method="get" th:action="@{/admin/buffet/manage}">
+					<button  type="submit"> Annulla</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="fragments/baseAdmin.html :: footer"></footer>
+</body>
+</html>

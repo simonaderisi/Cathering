@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head
+	th:replace="fragments/base.html :: headerfiles(title='Modifica piatto', css='/css/admin/aggiungi.css')">
+</head>
+<body>
+	<header th:replace="fragments/baseAdmin.html :: intestazione"></header>
+	<h4>Admin - Modifica Piatto</h4>
+	 <div class="aggiungi">
+		<div class="form">
+			<div>Modifica i dati del piatto appartenente al buffet "<span th:text="${piatto.buffet.nome}">buffet</span> "</div>
+			<h5>Info</h5>
+			<form class="aggiungi-form" th:action="@{'/admin/piatto/modifica/conferma/' + ${piatto.id}}" method="post" th:object="${piatto}" >
+				<div th:if = "${#fields.hasGlobalErrors()}">
+    				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</div>
+				<table>
+					<tr>
+						<td>Nome</td>
+						<td><input type="text" placeholder="nome"
+							th:field="*{nome}" /></td>
+						<td th:if="${#fields.hasErrors('nome')}"
+							th:errors="${nome}" th:style="'color:red'"></td>
+					</tr>
+					<tr>
+						<td>Descrizione</td>
+						<td ><textarea class = "descrizione" type="text" placeholder="descrizione"
+							th:field="*{descrizione}" ></textarea></td>
+						<td th:if="${#fields.hasErrors('descrizione')}"
+							th:errors="${descrizione}" th:style="'color:red'"></td>
+					</tr>
+				</table>
+				<button type="submit">Modifica info piatto</button>
+			</form>
+			<div class="elenco">
+				<h5>Gli ingredienti</h5>
+				<ul>
+					<li class="nome" th:each="ingrediente : ${piatto.ingredienti}">
+					 	<span th:text="${ingrediente.nome}"> ingrediente</span>
+						<form class="operazione" th:action="@{/admin/ingrediente/elimina/richiesta/} + ${ingrediente.id}" method="get">
+							<button type="submit">Elimina</button>
+						</form>
+						<form class="operazione" th:action="@{/admin/ingrediente/modifica/richiesta/} + ${ingrediente.id}" method="get">
+							<button type="submit">Modifica</button>
+						</form>
+					</li>
+				</ul>
+				<form method="get" th:action="@{/admin/ingrediente/add/form/} + ${piatto.id}">
+					<button  type="submit"> Aggiungi ingrediente</button>
+				</form>
+			</div>
+			<div>
+				<form class="annulla" method="get" th:action="@{/admin/buffet/modifica/richiesta/} + ${piatto.buffet.id}">
+					<button  type="submit"> Annulla</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="fragments/baseAdmin.html :: footer"></footer>
+</body>
+</html>

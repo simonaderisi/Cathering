@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="hhttp://www.thymeleaf.org">
+<head
+	th:replace="fragments/base.html :: headerfiles(title='Inserimento buffet', css='/css/admin/aggiungi.css')">
+</head>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	<!-- <form th:action="@{/admin/buffet/add}" method="post"
+		th:object="${buffet}">
+		<div th:if="${#fields.hasGlobalErrors()}">
+			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...
+		</div>
+		<div>
+			Nome: <input type="text" th:field="*{nome}" />
+			<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+		</div>
+		<div>
+			Descrizione: <input type="text" th:field="*{descrizione}" />
+			<div th:if="${#fields.hasErrors('descrizione')}"
+				th:errors="*{descrizione}"></div>
+		</div>
+		<div class="form-chef">
+			<label>Scegli Chef:</label>
+			<div th:each="chef : ${chefs}">
+				<input type="radio" th:field="*{chefIdent}" th:value="${chef.id}" th:text="${chef.nome} +' ' + ${chef.cognome}">
+			</div>
+		</div>
+		<div>
+			<button type="submit">Conferma</button>
+		</div>
+	</form> -->
+	<h4>Admin - Aggiungi Buffet</h4>
+	 <div class="aggiungi">
+		<div class="form">
+			<div>Inserisci i dati del buffet</div>
+			<form class="aggiungi-form" th:action="@{/admin/buffet/add}" method="post" th:object="${buffet}" >
+				<div th:if = "${#fields.hasGlobalErrors()}">
+    				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</div>
+				<table>
+					<tr>
+						<td>Nome</td>
+						<td><input type="text" placeholder="nome" required
+							th:field="*{nome}" /></td>
+						<td th:if="${#fields.hasErrors('nome')}"
+							th:errors="${nome}" th:style="'color:red'"></td>
+					</tr>
+					<tr>
+						<td>Descrizione</td>
+						<td ><textarea class = "descrizione" type="text" placeholder="descrizione"
+							th:field="*{descrizione}" ></textarea></td>
+						<td th:if="${#fields.hasErrors('descrizione')}"
+							th:errors="${descrizione}" th:style="'color:red'"></td>
+					</tr>
+					<tr class="radio">
+						<td> <label>Scegli chef</label></td>
+						<td><div th:each="chef : ${chefs}">
+							<input type="radio" th:field="*{chefIdent}" th:value="${chef.id}" th:text="${chef.nome} +' ' + ${chef.cognome}"></div></td>
+					</tr>
+				</table>
+
+				<button type="submit">Registra Chef</button>
+			</form>
+			<form class="annulla" method="get" th:action="@{/home}">
+				<button  type="submit"> Annulla</button>
+			</form>
+		</div>
+	</div>
+	
+	<footer th:replace="fragments/base.html :: footer"></footer>
+</body>
+</html>

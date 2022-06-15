@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="hhttp://www.thymeleaf.org">
+<head
+	th:replace="fragments/base.html :: headerfiles(title='Dettaglio Chef', css='/css/show.css')">
+</head>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	<div class="singleton">
+		<img th:if="${chef.photo != null}"
+			th:src="@{'/images/chef-photos/'+ ${chef.id} + '/' + ${chef.photo}}"></img>
+		<div class="info">
+			<h1 th:text="${chef.nome} + ' ' + ${chef.cognome}">Paolo Rossi</h1>
+			<p>
+				<span>Nazionalita: </span> <span th:text="${chef.nazionalita}">naz</span>
+			</p>
+			<p>Buffets:</p>
+			<ul>
+				<li th:each="buffet : ${chef.buffet}">
+					<a class="rif" th:href="@{'/buffet' + '/' + ${buffet.id}}"
+					th:text="${buffet.nome}">Veg </a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<footer th:replace="fragments/base.html :: footer"></footer>
+</body>
+</html>

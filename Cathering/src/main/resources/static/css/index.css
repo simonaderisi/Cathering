@@ -1,31 +1,152 @@
-body{
-  margin: 0;
-  padding: 0;
-  font-family: 'Taviraj', serif;
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Taviraj', serif;
 }
 
-nav{
-    margin:0;
-    padding:0;
-    top: 0;
+nav {
+	margin: 0;
+	padding: 0;
+	top: 0;
+}
+
+.overlay {
+	height: 800px;
+	width: 100%;
+}
+
+#home {
+	background: url("/images/sfondo2.png") no-repeat;
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+}
+
+h1 {
+	position: absolute;
+	border-bottom: 3px solid #900A0A;
+	left: 50%;
+	bottom: 50%;
+	color: #900A0A;
+	font-family: 'Tangerine', cursive;
+	font-size: 10rem;
+}
+
+#about {
+	margin-bottom: 150px;
+}
+
+#about h2 {
+	font-family: 'Tangerine', cursive;
+	color: #900A0A;
+	font-size: 6rem;
+	margin-left: 40px;
+}
+
+#about p {
+	margin-left: 80px;
+	margin-right: 80px;
+}
+
+#about #signature {
+	font-family: 'Tangerine', cursive;
+	font-size: 150%;
+	float: right;
+	color: #0d2435;
+	opacity: .9;
+}
+
+#flexbox {
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+}
+
+#flexbox ul {
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	list-style-type: none;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+#flexbox ul li {
+	height: 1000px;
+	width: 50vw;
+}
+
+#flexbox ul li img {
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+}
+
+.flex-item {
+	position: relative;
+	text-align: center;
+	color: #efefef;
+}
+
+.color {
+	width: 100%;
+	height: 100%;
+	background-size: contain;
+	margin-top: -80px;
+	opacity: 1;
+	-webkit-transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	-ms-transition: all 1s ease;
+	transition: all 1s ease;
+}
+
+.color:hover {
+	opacity: 0.3;
+}
+
+.description {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.description a {
+	color: #0d2435;
+}
+
+.description a:hover {
+	color: #0d2435;
+}
+
+.description a:visited {
+	color: #0d2435;
+}
+
+#contatti{
+	text-align: center;
 }
 
 
-
-#sfondo{
-    width: 100%;
-    opacity: 0.8;
+@media(max-width: 900px){
+	#flexbox ul li {
+	height: 500px;
+	width: 50vw;
+	}
 }
 
-
-#titolo{
-    position: absolute;
-    border-bottom: 3px solid #900A0A;
-    left: 50%;
-    bottom:50%;
-    color: #900A0A;
-    font-family: 'Tangerine', cursive;
-    font-size: 10em;
+@media ( max-width :500px) {
+	#about h2 {
+		font-size: 5rem;
+		margin-left: 0px;
+	}
+	#about p {
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+	
+	
 }
 
 

@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import it.uniroma3.siw.catering.controller.validator.BuffetValidator;
 import it.uniroma3.siw.catering.model.Buffet;
 import it.uniroma3.siw.catering.model.Chef;
-import it.uniroma3.siw.catering.model.Piatto;
 import it.uniroma3.siw.catering.service.BuffetService;
 import it.uniroma3.siw.catering.service.ChefService;
 
@@ -39,15 +38,26 @@ public class BuffetController {
 	@GetMapping("/buffet/elenco")
 	public String allBuffets(Model model) {
 		model.addAttribute("buffets", this.buffetService.findAll());
-		return "buffet/elencoBuffets.html"; //impl
+		return "show/buffet/elencoBuffets.html";
 	}
 
 
 	@GetMapping("/buffet/{id}")
 	public String showBuffet(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("buffet", this.buffetService.findById(id));
-		return "buffet/dettaglioBuffet.html";
+		return "show/buffet/dettaglioBuffet.html";
 	}
+	
+	
+	
+	
+	/*** ADMIN ***/
+	@GetMapping("/admin/buffet/manage")
+		public String adminBuffet(Model model) {
+			model.addAttribute("buffets", this.buffetService.findAll());
+			return "admin/buffet/gestisciBuffet.html";
+	}
+	
 
 	/* metodi (accessibili solo agli amministratori) per aggiungere buffet */
 
@@ -61,18 +71,18 @@ public class BuffetController {
 			chef.getBuffet().add(buffet);
 			this.chefService.save(chef);
 			model.addAttribute("buffet", buffet);
-			model.addAttribute("chefs", this.chefService.findAll());
-			return "buffet/formModificaBuffet.html";
+			return "admin/buffet/gestisciBuffet.html";
 		}
 		model.addAttribute("buffet", buffet);
-		return "buffet/aggiungiBuffet.html";
+		model.addAttribute("chefs", this.chefService.findAll());
+		return "admin/buffet/aggiungiBuffet.html";
 	}
 
 	@GetMapping("/admin/buffet/add")
 	public String buffetForm(Model model) {
 		model.addAttribute("buffet", new Buffet());
 		model.addAttribute("chefs", this.chefService.findAll());
-		return "buffet/aggiungiBuffet.html";
+		return "admin/buffet/aggiungiBuffet.html";
 	}
 
 	/* metodi (accessibili solo agli amministratori) per modificare buffet */
@@ -81,7 +91,7 @@ public class BuffetController {
 	public String chiediModificaBuffet(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("buffet", this.buffetService.findById(id));
 		model.addAttribute("chefs", this.chefService.findAll());
-		return "buffet/formModificaBuffet.html";
+		return "admin/buffet/formModificaBuffet.html";
 	}
 
 	@PostMapping("/admin/buffet/modifica/conferma/{id}")
@@ -95,8 +105,8 @@ public class BuffetController {
 		if(!bindingResult.hasErrors()) {
 			this.buffetService.modifyById(idBuffet, buffet);
 			this.modificaChef(toModify, buffet);
-			model.addAttribute("buffet", toModify);
-			return "buffet/dettaglioBuffet.html";
+			model.addAttribute("buffets", this.buffetService.findAll());
+			return "admin/buffet/gestisciBuffet.html";
 		}
 		return chiediModificaBuffet(idBuffet, model);
 	}
@@ -113,17 +123,13 @@ public class BuffetController {
 		}
 	}
 
-	/*@GetMapping("/admin/buffet/modifica/chef/richiesta/{id}")
-	public String chiediModificaChefDelBuffet(@PathVariable("id") Long idBuffet, Model model) {
-		model.addAttribute("buffet", )
-	}*/
 
 	/** metodi (accessibili solo agli amministratori) per eliminare buffet **/
 
 	@GetMapping("/admin/buffet/elimina/richiesta/{id}")
 	public String chiediEliminazioneBuffet(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("buffet", this.buffetService.findById(id));
-		return "buffet/confermaEliminazioneBuffet.html";
+		return "admin/buffet/confermaEliminazioneBuffet.html";
 	}
 
 	@PostMapping("/admin/buffet/elimina/conferma/{id}")
@@ -131,7 +137,7 @@ public class BuffetController {
 		this.buffetService.deleteById(id);
 		Collection<Buffet> buffets = this.buffetService.findAll();
 		model.addAttribute("buffets", buffets);
-		return "buffet/elencoBuffets.html";
+		return "admin/buffet/gestisciBuffet.html";
 	}
 
 

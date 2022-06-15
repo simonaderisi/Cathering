@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="hhttp://www.thymeleaf.org">
+<head
+	th:replace="fragments/baseAdmin.html :: headerfiles(title='Admin Catering', css='/css/admin/indexAdmin.css')">
+</head>
+<body>
+	<header th:replace="fragments/baseAdmin.html :: intestazione"></header>
+	<h1>Admin - Catering</h1>
+	<div class="cards">
+		<div class="card chef">
+			<h4>Chef</h4>
+			<form th:action="@{/admin/chef/add}" method="get">
+				<button type="submit"> Aggiungi un nuovo Chef</button>
+			</form>
+			<form th:action="@{/admin/chef/manage}">
+				<button type="submit"> Gestisci gli Chef</button>
+			</form>
+		</div>
+		<div class="card buffet">
+			<h4>Buffet</h4>
+			<form th:action="@{/admin/buffet/add}" method="get">
+				<button type="submit"> Aggiungi un nuovo Buffet</button>
+			</form>
+			<form th:action="@{/admin/buffet/manage}">
+				<button type="submit"> Gestisci i Buffet</button>
+			</form>
+		</div>
+	</div>
+	<footer th:replace="fragments/baseAdmin.html :: footer"></footer>
+</body>
+</html>

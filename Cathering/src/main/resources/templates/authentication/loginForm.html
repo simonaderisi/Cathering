@@ -1,28 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/base.html :: headerfiles(title='Login', css='/css/index.css')"> </head>
+<head
+	th:replace="fragments/base.html :: headerfiles(title='Login', css='/css/authentication/authForm.css')">
+</head>
 <body>
 	<header th:replace="fragments/base.html :: intestazione"></header>
 	<div>
 		<h4>Login</h4>
 	</div>
-	<form th:action="@{/login}" method="POST">
-		<div>
-			<div>
-				<span>Username:</span>
-				<span><input name="username" type="text" required /></span>
-			</div>		
-			<div>
-				<span>Password:</span>
-				<span><input name="password" type="password" required /></span>
-			</div>
-			<div>
-				<span><button type="submit">Login</button></span>
+	<div class="login-page">
+		<div class="item">
+			<div class="form">
+				<form class="login-form" th:action="@{/login}" method="POST">
+					<input placeholder="username" name="username" type="text" required /> 
+					<input placeholder="password" name="password" type="password" required />
+					<button type="submit">Login</button>
+					<p class="message">
+						Non sei registrato? <a th:href="@{/register}">Crea un account</a>
+					</p>
+				</form>
 			</div>
 		</div>
-	</form>
-	<form action="oauth2/authorization/google">
-		<input type="submit" value="Login Google" />
-	</form>
+		<div class="item">
+			<strong>Oppure</strong>
+		</div>
+		<div class="item">
+			<form class="google" action="oauth2/authorization/google">
+				<button class="google-btn" type="submit" >Login con Google</button>
+			</form>
+		</div>
+	</div>
+
+	<!--  <div class="login-page">
+		<div class="form">
+			<form class="login-form">
+				<input type="text" placeholder="username" /> <input type="password"
+					placeholder="password" />
+				<button>login</button>
+				
+			</form>
+		</div>
+	</div>-->
+	<footer th:replace="fragments/base.html :: footer"></footer>
 </body>
 </html>

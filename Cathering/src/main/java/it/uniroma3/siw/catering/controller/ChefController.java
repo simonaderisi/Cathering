@@ -47,6 +47,17 @@ public class ChefController {
 	}
 	
 	
+	
+	
+	
+	/*** ADMIN ***/
+	@GetMapping("/admin/chef/manage")
+		public String adminChef(Model model) {
+			model.addAttribute("chefs", this.chefService.findAll());
+			return "admin/chef/gestisciChef.html";
+	}
+	
+	
 	/** metodi (riservati agli amministratori) per aggiungere uno chef */ 
 	
 	@PostMapping("/admin/chef/add")
@@ -54,59 +65,70 @@ public class ChefController {
 							   @RequestParam("image") MultipartFile multipartFile, BindingResult bindingResult, Model model) {
         this.chefValidator.validate(chef, bindingResult);
 		if(!bindingResult.hasErrors()) {
+			//prendi il nome del file
 			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 			chef.setPhoto(fileName);
-            chefService.save(chef);    
+			
+            chefService.save(chef);  
+            //salva il file
             String uploadDir = DIR + chef.getId();
             FileManager.store(multipartFile, uploadDir);
-            model.addAttribute("chef", chef);
-            return "chef/dettaglioChef.html";
+            
+            model.addAttribute("chefs", this.chefService.findAll());
+            return "admin/chef/gestisciChef.html";
         }
-        return "index.html";
+		model.addAttribute("chef", chef);
+        return "admin/chef/aggiungiChef.html";
     }
 	
 	@GetMapping("/admin/chef/add")
 	public String chefForm(Model model) {
 		model.addAttribute("chef", new Chef());
-		return "chef/aggiungiChef.html";
+		return "admin/chef/aggiungiChef.html";
 	}
 	
 	
 /* metodi (accessibili solo agli amministratori) per modificare chef */
 	
 	@GetMapping("/admin/chef/modifica/richiesta/{id}")
-	public String chiediModificaChef(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("chef", this.chefService.findById(id));
-		return "chef/formModificaChef.html";
+	public String chiediModificaChef(@PathVariable("id") Long idChef, Model model) {
+		model.addAttribute("chef", this.chefService.findById(idChef));
+		return "admin/chef/formModificaChef.html";
 	}
 	
 	@PostMapping("/admin/chef/modifica/conferma/{id}")
-	public String confermaModificaChef(@Valid @ModelAttribute("buffet")  Chef chef, 
-											  BindingResult bindingResult, @PathVariable("id") Long id, Model model) {
+	public String confermaModificaChef(@Valid @ModelAttribute("chef")  Chef chef, @RequestParam("image")MultipartFile multipartFile, 
+											  BindingResult bindingResult, @PathVariable("id") Long idChef, Model model) {
 		this.chefValidator.validate(chef, bindingResult);
 		if(!bindingResult.hasErrors()) {
-			this.chefService.modifyById(id, chef);
-			model.addAttribute("chef", this.chefService.findById(id));
-			return "chef/dettaglioChef.html";
+			if(! multipartFile.isEmpty()) {
+				FileManager.removeImg(DIR + idChef, chef.getPhoto());
+				String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+				chef.setPhoto(fileName);    
+	            String uploadDir = DIR + idChef;
+	            FileManager.store(multipartFile, uploadDir);
+			}
+			this.chefService.modifyById(idChef, chef);
+			model.addAttribute("chefs", this.chefService.findAll());
+			return "admin/chef/gestisciChef.html";
 		}
-		return "chef/formModificaChef.html";
+		return chiediModificaChef(idChef, model);
 	}
 	
 	/** metodi (accessibili solo agli amministratori) per eliminare chef **/
 	
 	@GetMapping("/admin/chef/elimina/richiesta/{id}")
-	public String chiediEliminazioneChef(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("chef", this.chefService.findById(id));
-		return "chef/confermaEliminazioneChef.html";
+	public String chiediEliminazioneChef(@PathVariable("id") Long idChef, Model model) {
+		model.addAttribute("chef", this.chefService.findById(idChef));
+		return "admin/chef/confermaEliminazioneChef.html";
 	}
 	
 	@PostMapping("/admin/chef/elimina/conferma/{id}")
-	public String confermaEliminazioneChef(@PathVariable("id") Long id, Model model) {
-		this.chefService.deleteById(id);
+	public String confermaEliminazioneChef(@PathVariable("id") Long idChef, Model model) {
+		FileManager.dirEmptyEndDelete(DIR + idChef);
+		this.chefService.deleteById(idChef);
 		Collection<Chef> chefs = this.chefService.findAll();
 		model.addAttribute("chefs", chefs);
-		return "chef/elencoChefs.html";
+		return "admin/chef/gestisciChef.html";
 	}
-	
-	
 }
