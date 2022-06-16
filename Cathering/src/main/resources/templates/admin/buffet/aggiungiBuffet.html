@@ -5,30 +5,6 @@
 </head>
 <body>
 	<header th:replace="fragments/base.html :: intestazione"></header>
-	<!-- <form th:action="@{/admin/buffet/add}" method="post"
-		th:object="${buffet}">
-		<div th:if="${#fields.hasGlobalErrors()}">
-			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...
-		</div>
-		<div>
-			Nome: <input type="text" th:field="*{nome}" />
-			<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
-		</div>
-		<div>
-			Descrizione: <input type="text" th:field="*{descrizione}" />
-			<div th:if="${#fields.hasErrors('descrizione')}"
-				th:errors="*{descrizione}"></div>
-		</div>
-		<div class="form-chef">
-			<label>Scegli Chef:</label>
-			<div th:each="chef : ${chefs}">
-				<input type="radio" th:field="*{chefIdent}" th:value="${chef.id}" th:text="${chef.nome} +' ' + ${chef.cognome}">
-			</div>
-		</div>
-		<div>
-			<button type="submit">Conferma</button>
-		</div>
-	</form> -->
 	<h4>Admin - Aggiungi Buffet</h4>
 	 <div class="aggiungi">
 		<div class="form">

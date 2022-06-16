@@ -3,26 +3,6 @@
 <head th:replace="fragments/base.html :: headerfiles(title='Modifica ingrediente', css='/css/admin/aggiungi.css')"> </head>
 <body>
 	<header th:replace="fragments/baseAdmin.html :: intestazione"></header>
-
-	<!-- <h2>Modifica Ingrediente</h2>
-
-	<form th:action="@{/admin/ingrediente/modifica/conferma/} + ${ingrediente.id}" method="post" th:object="${ingrediente}">
-		<div th:if="${#fields.hasGlobalErrors()}">
-			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
-		</div>
-		<div>Nome:<br><input type="text" th:field="*{nome}"></div>
-		<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
-		<br>
-		<div>Origine:<br><input type="text" th:field="*{origine}"></div>
-		<div th:if="${#fields.hasErrors('origine')}" th:errors="*{origine}"></div>
-		<br>
-		<div>Descrizione:<br><input type="text" th:field="*{descrizione}"></div>
-		<div th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></div>
-		<br>
-
-		<div><button type="submit">Modifica</button></div>
-	</form>
-	<br> -->
 	<h4>Admin - Modifica Ingrediente</h4>
 	 <div class="aggiungi">
 		<div class="form">

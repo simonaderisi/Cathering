@@ -60,7 +60,6 @@ public class PiattoController {
 		piatto.setBuffet(buffet);
 		this.piattoValidator.validate(piatto, bindingResult);
 		if(!bindingResult.hasErrors()) {
-			//this.piattoService.save(piatto);
             this.buffetService.addPiatto(idBuffet, piatto);
             model.addAttribute("buffet", buffet);
             model.addAttribute("chefs", this.chefService.findAll());

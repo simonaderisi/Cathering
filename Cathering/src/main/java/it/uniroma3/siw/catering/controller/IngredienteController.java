@@ -57,7 +57,6 @@ public class IngredienteController {
 		ingrediente.setPiatto(piatto);
         this.ingredienteValidator.validate(ingrediente, bindingResult);
 		if(!bindingResult.hasErrors()) {
-			//this.ingredienteService.save(ingrediente);
            this.piattoService.addIngrediente(idPiatto, ingrediente);
             model.addAttribute("piatto", piatto);
             return "admin/piatto/formModificaPiatto.html";

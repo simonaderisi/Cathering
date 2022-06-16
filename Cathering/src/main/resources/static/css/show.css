@@ -24,31 +24,30 @@
 		rgba(0, 0, 0, 0.24);
 }
 
-.card .chef{
+.card .chef {
 	display: flex;
 	flex-direction: row;
 	justify-content: start;
 	align-items: start;
 }
 
-@media(max-width:800px){
-	.card .chef{
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-}
+@media ( max-width :800px) {
+	.card .chef {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
 }
 
-.chef img{
+.chef img {
 	width: 50%;
 }
 
-a, a:visited, a:hover, a:focus{
+a, a:visited, a:hover, a:focus {
 	text-decoration: none;
 	color: inherit;
 }
-
 
 .card span {
 	display: block;
@@ -67,17 +66,17 @@ a, a:visited, a:hover, a:focus{
 	background-color: #900A0A;
 }
 
-
-h1 { 
+h1 {
 	text-align: center;
-	color:  #900A0A;
+	color: #900A0A;
 	font-size: 5rem;
 }
 
-h3{
+h3 {
 	text-align: center;
 	color: #efefef;
 }
+
 .card-meta {
 	max-height: 0;
 	overflow: hidden;
@@ -93,28 +92,26 @@ img {
 	max-width: 50%;
 }
 
-.info{
+.info {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: start;
 }
 
-.info ul{
+.info ul {
 	list-style: none;
 }
 
-.rif{
+.rif {
 	text-transform: uppercase;
-	
 }
 
-.rif:hover{
-	color:  #900A0A;
+.rif:hover {
+	color: #900A0A;
 }
 
-
-.singleton{
+.singleton {
 	width: 90%;
 	font-size: 2rem;
 	margin-top: 40px;
@@ -132,14 +129,49 @@ img {
 		rgba(0, 0, 0, 0.24);
 }
 
-.ingrediente{
+.ingrediente {
 	background: url("/images/ingredienteSfondo.jpg") repeat-y;
 	background-size: cover;
-	
 }
 
-.piatto{
+.piatto {
 	background: url("/images/piattoSfondo.jpeg") repeat-y;
 	background-size: cover;
 }
+
+@media ( max-width :800px) {
+	.ingrediente {
+		background: url("/images/ingredienteSfondo.jpg");
+		background-image: revert;
+		background-size: cover;
+	}
+	.piatto {
+		background: url("/images/piattoSfondo.jpeg");
+		background-image: revert;
+		background-size: cover;
+	}
+	
+	.singleton {
+	width: 90%;
+	font-size: 2rem;
+	margin-top: 40px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	z-index: 1;
+	background: #FFFFFF;
+	margin: 0 auto 100px;
+	padding: 45px;
+	text-align: center;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0
+		rgba(0, 0, 0, 0.24);
+}
+}
+
+
+
+
+
 
