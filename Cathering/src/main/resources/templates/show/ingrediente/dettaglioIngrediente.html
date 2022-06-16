@@ -5,8 +5,8 @@
 </head>
 <body>
 	<header th:replace="fragments/base.html :: intestazione"></header>
-	<div class="singleton">
-		<div class="info large">
+	<div class="singleton ingrediente">
+		<div class="info">
 			<h1 th:text="${ingrediente.nome}">ingrediente </h1>
 			<p>
 				<span>Origine: </span> <span th:text="${ingrediente.origine}">naz</span>

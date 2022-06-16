@@ -38,13 +38,13 @@ public class PiattoController {
 	@GetMapping("/piatto/elenco")
 	public String allPiatti(Model model) {
 		model.addAttribute("piatti", this.piattoService.findAll());
-		return "piatto/elencoPiatti.html";
+		return "show/piatto/elencoPiatti.html";
 	}
 	
 	@GetMapping("/piatto/{id}")
 	public String showPiatto(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("piatto", this.piattoService.findById(id));
-		return "piatto/dettaglioPiatto.html"; //impl
+		return "show/piatto/dettaglioPiatto.html"; //impl
 	}
 	
 	
@@ -60,8 +60,8 @@ public class PiattoController {
 		piatto.setBuffet(buffet);
 		this.piattoValidator.validate(piatto, bindingResult);
 		if(!bindingResult.hasErrors()) {
-            buffet.getPiatti().add(piatto);
-            this.buffetService.modifyById(idBuffet, buffet);
+			//this.piattoService.save(piatto);
+            this.buffetService.addPiatto(idBuffet, piatto);
             model.addAttribute("buffet", buffet);
             model.addAttribute("chefs", this.chefService.findAll());
             return "admin/buffet/formModificaBuffet.html"; 

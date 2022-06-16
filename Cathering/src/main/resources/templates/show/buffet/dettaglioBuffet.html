@@ -6,6 +6,7 @@
 <body>
 	<header th:replace="fragments/base.html :: intestazione"></header>
 	<div class="singleton">
+		<img src="/images/generalBuffet.png" />
 		<div class="info">
 			<h1 th:text="${buffet.nome}">Paolo Rossi</h1>
 			<p>
@@ -13,7 +14,7 @@
 			</p>
 			<br>
 			<p>
-				<span>Questo buffet e offerto da <a th:href="@{/chef/} + ${buffet.chef.id}" th:text="${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}"></span></span>
+				<span>Questo buffet e offerto da <a th:href="@{/chef/} + ${buffet.chef.id}" th:text="${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}"></a></span>
 			</p><br>
 			<p>Piatti:</p>
 			<ul>

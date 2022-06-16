@@ -34,13 +34,13 @@ public class IngredienteController {
 	@GetMapping("/ingrediente/elenco")
 	public String allIngredienti(Model model) {
 		model.addAttribute("ingredienti", this.ingredienteService.findAll());
-		return "ingrediente/elencoIngredienti.html"; //impl
+		return "show/ingrediente/elencoIngredienti.html"; //impl
 	}
 	
 	@GetMapping("/ingrediente/{id}")
 	public String showIngrediente(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("ingrediente", this.ingredienteService.findById(id));
-		return "ingrediente/dettaglioIngrediente.html";
+		return "show/ingrediente/dettaglioIngrediente.html";
 	}
 	
 	
@@ -57,8 +57,8 @@ public class IngredienteController {
 		ingrediente.setPiatto(piatto);
         this.ingredienteValidator.validate(ingrediente, bindingResult);
 		if(!bindingResult.hasErrors()) {
-            piatto.getIngredienti().add(ingrediente);
-            this.piattoService.modifyById(idPiatto, piatto);
+			//this.ingredienteService.save(ingrediente);
+           this.piattoService.addIngrediente(idPiatto, ingrediente);
             model.addAttribute("piatto", piatto);
             return "admin/piatto/formModificaPiatto.html";
         }

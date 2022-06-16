@@ -28,7 +28,7 @@
 							th:errors="${descrizione}" th:style="'color:red'"></td>
 					</tr>
 					<tr>
-						<td>L'attuale chef e <span th:text="${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}"></span></td>
+						<td>L'attuale chef e <span th:if="${buffet.chef!=null}" th:text="${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}"></span></td>
 					</tr>
 					<tr class="radio">
 						<td> <label>Modifica chef</label></td>

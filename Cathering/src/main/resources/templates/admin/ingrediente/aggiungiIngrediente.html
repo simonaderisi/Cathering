@@ -4,21 +4,6 @@
 </head>
 <body>
 	<header th:replace="fragments/base.html :: intestazione"></header>
-	<!-- <div>Aggiungi un ingrediente al piatto: <span th:text="${piatto.nome}"></span></div>
-    <form th:action="@{'/admin/ingrediente/add/' + ${piatto.id}}" method="post" th:object="${ingrediente}">
-    	<div th:if = "${#fields.hasGlobalErrors()}">
-    		<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</div>
-    	<div> Nome: <input type="text" th:field="*{nome}" />
-    	<div th:if = "${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
-    	</div>
-    	<div> Origine: <input type="text" th:field="*{origine}" />
-    	<div th:if = "${#fields.hasErrors('origine')}" th:errors="*{origine}"></div>
-    	</div>
-    	<div> Descrizione: <input type="text" th:field="*{descrizione}" />
-    	<div th:if = "${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></div>
-    	</div>
-    	<div><button type="submit">Conferma </button></div>
-    </form> -->
     <h4>Admin - Aggiungi Ingrediente</h4>
     
 	 <div class="aggiungi">
@@ -26,7 +11,7 @@
 			<div>Inserisci i dati dell'ingrediente che vuoi aggiungere al piatto "
 				<span th:text="${piatto.nome}"> piatto </span>"
     			facente parte del buffet "
-    			<span th:text="@{piatto.buffet.nome}"> buffet</span>"
+    			<span th:text="${piatto.buffet.nome}"> buffet</span>"
     		</div>
 			<form class="aggiungi-form" th:action="@{'/admin/ingrediente/add/' + ${piatto.id}}" method="post" th:object="${ingrediente}" >
 				<div th:if = "${#fields.hasGlobalErrors()}">

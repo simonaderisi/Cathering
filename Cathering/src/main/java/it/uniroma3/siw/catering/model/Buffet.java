@@ -26,7 +26,7 @@ public class Buffet {
 	@Column(length=2000)
 	private String descrizione;
 	
-	@OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "buffet")
+	@OneToMany (cascade = CascadeType.ALL, mappedBy = "buffet")
 	private List<Piatto> piatti;
 	
 	@ManyToOne

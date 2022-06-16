@@ -26,7 +26,7 @@ public class Piatto {
 	@Column(length=2000)
 	private String descrizione;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "piatto")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "piatto")
 	private List <Ingrediente> ingredienti;
 	
 	@ManyToOne

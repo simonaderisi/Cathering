@@ -3,9 +3,12 @@ package it.uniroma3.siw.catering.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.uniroma3.siw.catering.model.Ingrediente;
 import it.uniroma3.siw.catering.model.Piatto;
 import it.uniroma3.siw.catering.repository.PiattoRepository;
 
@@ -57,6 +60,14 @@ public class PiattoService implements CateringService<Piatto> {
 	@Override
 	public boolean alreadyExist(Piatto piatto) {
 		return this.piattoRepository.existsByNomeAndDescrizioneAndBuffet(piatto.getNome(), piatto.getDescrizione(), piatto.getBuffet());
+	}
+	
+	
+	@Transactional
+	public void addIngrediente(Long id, Ingrediente ingrediente) {
+		Piatto piatto = this.piattoRepository.findById(id).get();
+		piatto.getIngredienti().add(ingrediente);
+		this.piattoRepository.save(piatto);
 	}
 
 }

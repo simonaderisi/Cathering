@@ -37,13 +37,13 @@ public class ChefController {
 	@GetMapping("/chef/elenco")
 	public String allChefs(Model model) {
 		model.addAttribute("chefs", this.chefService.findAll());
-		return "chef/elencoChefs.html";
+		return "show/chef/elencoChefs.html";
 	}
 	
 	@GetMapping("/chef/{id}")
 	public String showChef(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("chef", this.chefService.findById(id));
-		return "chef/dettaglioChef.html";
+		return "show/chef/dettaglioChef.html";
 	}
 	
 	

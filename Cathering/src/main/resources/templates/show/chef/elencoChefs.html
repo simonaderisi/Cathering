@@ -10,7 +10,7 @@
 	<div class="cards">
 		<a class="card chef" th:each="chef : ${chefs}"
 			th:href="@{/chef/} + ${chef.id}"> 
-			<img src="@{'images/chef-photos/'+ ${chef.id} + '/' + ${chef.photo}}">
+			<img th:src="@{'images/chef-photos/'+ ${chef.id} + '/' + ${chef.photo}}"/>
 			<div class="info">
 				<span class="card-header"
 					th:text="${chef.nome} + ' ' + ${chef.cognome}"> </span> <span

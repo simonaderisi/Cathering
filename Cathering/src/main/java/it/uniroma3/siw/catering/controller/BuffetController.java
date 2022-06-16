@@ -70,7 +70,7 @@ public class BuffetController {
 			buffetService.save(buffet);
 			chef.getBuffet().add(buffet);
 			this.chefService.save(chef);
-			model.addAttribute("buffet", buffet);
+			model.addAttribute("buffets", this.buffetService.findAll());
 			return "admin/buffet/gestisciBuffet.html";
 		}
 		model.addAttribute("buffet", buffet);

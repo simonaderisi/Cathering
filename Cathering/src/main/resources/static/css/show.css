@@ -17,7 +17,7 @@
 	position: relative;
 	z-index: 1;
 	background: #FFFFFF;
-	margin: 0 auto 100px;
+	margin: 30px auto 100px;
 	padding: 45px;
 	text-align: center;
 	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0
@@ -29,6 +29,15 @@
 	flex-direction: row;
 	justify-content: start;
 	align-items: start;
+}
+
+@media(max-width:800px){
+	.card .chef{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
 }
 
 .chef img{
@@ -121,5 +130,16 @@ img {
 	text-align: center;
 	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0
 		rgba(0, 0, 0, 0.24);
+}
+
+.ingrediente{
+	background: url("/images/ingredienteSfondo.jpg") repeat-y;
+	background-size: cover;
+	
+}
+
+.piatto{
+	background: url("/images/piattoSfondo.jpeg") repeat-y;
+	background-size: cover;
 }
 

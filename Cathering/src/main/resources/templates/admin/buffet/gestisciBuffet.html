@@ -12,7 +12,7 @@
 				<div class="info gg">
 					<div class="nome">Buffet <span th:text="${buffet.nome}"></span></div>
 					<div>Descrizione: <span th:text="${buffet.descrizione}"></span></div>
-					<div>Questo buffet e offerto da <span th:text="${buffet.chef.nome} + ' '+ ${buffet.chef.cognome}"></span></div>
+					<div>Questo buffet e offerto da <span th:if="${buffet.chef!=null}" th:text="${buffet.chef.nome} + ' '+ ${buffet.chef.cognome}"></span></div>
 				</div>
 				<div class="operazioni gg">
 					<form th:action="@{/admin/buffet/elimina/richiesta/} + ${buffet.id}">
